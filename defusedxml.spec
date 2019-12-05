@@ -4,7 +4,7 @@
 #
 Name     : defusedxml
 Version  : 0.6.0
-Release  : 17
+Release  : 18
 URL      : https://github.com/tiran/defusedxml/archive/v0.6.0/defusedxml-0.6.0.tar.gz
 Source0  : https://github.com/tiran/defusedxml/archive/v0.6.0/defusedxml-0.6.0.tar.gz
 Summary  : No detailed summary available
