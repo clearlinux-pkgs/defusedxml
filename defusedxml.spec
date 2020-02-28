@@ -4,10 +4,10 @@
 #
 Name     : defusedxml
 Version  : 0.6.0
-Release  : 20
+Release  : 21
 URL      : https://github.com/tiran/defusedxml/archive/v0.6.0/defusedxml-0.6.0.tar.gz
 Source0  : https://github.com/tiran/defusedxml/archive/v0.6.0/defusedxml-0.6.0.tar.gz
-Summary  : No detailed summary available
+Summary  : XML bomb protection for Python stdlib modules
 Group    : Development/Tools
 License  : Python-2.0
 Requires: defusedxml-license = %{version}-%{release}
@@ -55,6 +55,7 @@ python components for the defusedxml package.
 Summary: python3 components for the defusedxml package.
 Group: Default
 Requires: python3-core
+Provides: pypi(defusedxml)
 
 %description python3
 python3 components for the defusedxml package.
@@ -62,13 +63,16 @@ python3 components for the defusedxml package.
 
 %prep
 %setup -q -n defusedxml-0.6.0
+cd %{_builddir}/defusedxml-0.6.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557084225
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1582916611
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -83,7 +87,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/defusedxml
-cp LICENSE %{buildroot}/usr/share/package-licenses/defusedxml/LICENSE
+cp %{_builddir}/defusedxml-0.6.0/LICENSE %{buildroot}/usr/share/package-licenses/defusedxml/c0a4a8cdd88e9432b6dae397e751cfe61ba6ed88
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -94,7 +98,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/defusedxml/LICENSE
+/usr/share/package-licenses/defusedxml/c0a4a8cdd88e9432b6dae397e751cfe61ba6ed88
 
 %files python
 %defattr(-,root,root,-)

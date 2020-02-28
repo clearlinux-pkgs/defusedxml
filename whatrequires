@@ -1,3 +1,9 @@
 # This file contains recursive sources that require this package
+cinder
+diffoscope
+dldt
+dldt-model-optimizer
+glance
 nbconvert
+pysaml2
 python-zeep
