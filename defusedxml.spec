@@ -4,7 +4,7 @@
 #
 Name     : defusedxml
 Version  : 0.7.1
-Release  : 30
+Release  : 31
 URL      : https://github.com/tiran/defusedxml/archive/v0.7.1/defusedxml-0.7.1.tar.gz
 Source0  : https://github.com/tiran/defusedxml/archive/v0.7.1/defusedxml-0.7.1.tar.gz
 Summary  : XML bomb protection for Python stdlib modules
