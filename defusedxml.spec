@@ -4,7 +4,7 @@
 #
 Name     : defusedxml
 Version  : 0.7.1
-Release  : 39
+Release  : 40
 URL      : https://github.com/tiran/defusedxml/archive/v0.7.1/defusedxml-0.7.1.tar.gz
 Source0  : https://github.com/tiran/defusedxml/archive/v0.7.1/defusedxml-0.7.1.tar.gz
 Summary  : XML bomb protection for Python stdlib modules
@@ -14,11 +14,11 @@ Requires: defusedxml-license = %{version}-%{release}
 Requires: defusedxml-python = %{version}-%{release}
 Requires: defusedxml-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-BuildRequires : pluggy
-BuildRequires : py-python
-BuildRequires : pytest
-BuildRequires : tox
-BuildRequires : virtualenv
+BuildRequires : pypi(py)
+BuildRequires : pypi-pluggy
+BuildRequires : pypi-pytest
+BuildRequires : pypi-tox
+BuildRequires : pypi-virtualenv
 
 %description
 ===================================================
@@ -61,7 +61,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635723029
+export SOURCE_DATE_EPOCH=1644186307
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -71,14 +71,14 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
-python3 setup.py build
+python3 -m build --wheel --skip-dependency-check --no-isolation
 
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/defusedxml
 cp %{_builddir}/defusedxml-0.7.1/LICENSE %{buildroot}/usr/share/package-licenses/defusedxml/c0a4a8cdd88e9432b6dae397e751cfe61ba6ed88
-python3 -tt setup.py build  install --root=%{buildroot}
+pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
